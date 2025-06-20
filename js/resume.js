@@ -1,6 +1,4 @@
 (function () {
-  "use strict"; // Start of use strict
-
   // Smooth scrolling using native JS
   document
     .querySelectorAll('a.js-scroll-trigger[href*="#"]:not([href="#"])')
@@ -37,11 +35,31 @@
       }
     });
   });
+})();
 
-  // Activate scrollspy (Bootstrap 5)
-  if (window.bootstrap && document.body) {
-    bootstrap.ScrollSpy.getOrCreateInstance(document.body, {
-      target: "#sideNav",
-    });
-  }
-})(); // End of use strict
+// Expand/Collapse all accordions with toggle button using a global function
+let isExpanded = true;
+toggleProjects = function () {
+  isExpanded = !isExpanded;
+  const accordionCollapses = document.querySelectorAll(".accordion-collapse");
+  const accordionButton = document.querySelectorAll(".accordion-button");
+  accordionCollapses.forEach((collapse) => {
+    if (isExpanded) {
+      collapse.classList.add("show");
+    } else {
+      collapse.classList.remove("show");
+    }
+  });
+  accordionButton.forEach((button) => {
+    if (isExpanded) {
+      button.classList.remove("collapsed");
+    } else {
+      button.classList.add("collapsed");
+    }
+  });
+  const toggleBtn = document.getElementById("toggleAccordion");
+  if (toggleBtn)
+    toggleBtn.innerHTML = isExpanded
+      ? `Collapse All  <i  class="fa fa-chevron-up"></i>`
+      : `Expand All <i class="fa fa-chevron-down"></i>`;
+};
